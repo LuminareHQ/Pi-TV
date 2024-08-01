@@ -6,3 +6,5 @@ export type ActiveDevices = {
 };
 
 export const activeRemotes = writable<Array<ActiveDevices>>([]);
+
+export const lastQrViewTime = writable<number>(Date.now() - 10000);

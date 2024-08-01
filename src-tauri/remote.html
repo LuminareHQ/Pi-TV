@@ -8,177 +8,158 @@
     <div id="grid-container">
       <div id="nav-grid">
         <div>
-          <button class="nav-grid-button" id="BACK">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-undo-2">
-              <path d="M9 14 4 9l5-5" />
-              <path
-                d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />
-            </svg>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_BACK"
+            onclick="sendEvent('NAVIGATE','BACK'); return false;"
+          ></button>
+        </div>
+        <div>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_UP"
+            onclick="sendEvent('NAVIGATE','UP'); return false;"
+          ></button>
+        </div>
+        <div>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_FULLSCREEN"
+            onclick="sendEvent('NAVIGATE','FULLSCREEN'); return false;"
+          ></button>
+        </div>
+        <div>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_LEFT"
+            onclick="sendEvent('NAVIGATE','LEFT'); return false;"
+          ></button>
+        </div>
+        <div>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_OK"
+            onclick="sendEvent('NAVIGATE','OK'); return false;"
+          >
+            OK
           </button>
         </div>
         <div>
-          <button class="nav-grid-button" id="UP">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-arrow-up">
-              <path d="m5 12 7-7 7 7" />
-              <path d="M12 19V5" />
-            </svg>
-          </button>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_RIGHT"
+            onclick="sendEvent('NAVIGATE','RIGHT'); return false;"
+          ></button>
         </div>
         <div>
-          <button class="nav-grid-button" id="FULLSCREEN">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-arrow-up">
-              <path d="m5 12 7-7 7 7" />
-              <path d="M12 19V5" />
-            </svg>
-          </button>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_HOME"
+            onclick="sendEvent('NAVIGATE','HOME'); return false;"
+          ></button>
         </div>
         <div>
-          <button class="nav-grid-button" id="LEFT">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-arrow-left">
-              <path d="m12 19-7-7 7-7" />
-              <path d="M19 12H5" />
-            </svg>
-          </button>
-        </div>
-        <div><button class="nav-grid-button" id="OK">OK</button></div>
-        <div>
-          <button class="nav-grid-button" id="RIGHT">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-arrow-right">
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-        <div></div>
-        <div>
-          <button class="nav-grid-button" id="DOWN">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-arrow-down">
-              <path d="M12 5v14" />
-              <path d="m19 12-7 7-7-7" />
-            </svg>
-          </button>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_DOWN"
+            onclick="sendEvent('NAVIGATE','DOWN'); return false;"
+          ></button>
         </div>
         <div>
-          <button class="nav-grid-button" id="QR">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-qr-code">
-              <rect width="5" height="5" x="3" y="3" rx="1" />
-              <rect width="5" height="5" x="16" y="3" rx="1" />
-              <rect width="5" height="5" x="3" y="16" rx="1" />
-              <path d="M21 16h-3a2 2 0 0 0-2 2v3" />
-              <path d="M21 21v.01" />
-              <path d="M12 7v3a2 2 0 0 1-2 2H7" />
-              <path d="M3 12h.01" />
-              <path d="M12 3h.01" />
-              <path d="M12 16v.01" />
-              <path d="M16 12h1" />
-              <path d="M21 12v.01" />
-              <path d="M12 21v-1" />
-            </svg>
-          </button>
+          <button
+            class="nav-grid-button"
+            id="NAVIGATE_QR"
+            onclick="sendEvent('NAVIGATE','QR'); return false;"
+          ></button>
         </div>
       </div>
     </div>
+    <div id="connection-alert-banner">Connection Error</div>
     <script>
       let uniqueId =
         Math.random().toString(36).substring(2) + Date.now().toString(36);
 
+      let heartbeatError;
+
       sendEvent("HEARTBEAT", "PING", uniqueId);
       window.setInterval(() => {
-        sendEvent("HEARTBEAT", "PING", uniqueId);
-      }, 5000);
+        sendEvent("HEARTBEAT", "PING", uniqueId)
+          .then(() => {
+            heartbeatError = false;
+          })
+          .catch(() => {
+            heartbeatError = true;
+          });
+      }, 1000);
 
-      document.querySelectorAll(".nav-grid-button").forEach((button) => {
-        button.addEventListener("click", (event) => {
-          sendEvent("NAVIGATE", event.target.id);
-        });
-      });
+      window.setInterval(() => {
+        if (heartbeatError) {
+          document
+            .getElementById("connection-alert-banner")
+            .classList.remove("hidden");
+        } else {
+          document
+            .getElementById("connection-alert-banner")
+            .classList.add("hidden");
+        }
+      }, 50);
 
       function sendEvent(_event, _action, _modifier = "") {
         let destination =
           "/actions?" +
           new URLSearchParams({
-            event_type: _event,
+            event: _event,
             action: _action,
             modifier: _modifier,
           }).toString();
 
-        fetch(destination, {
+        return fetch(destination, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
         });
       }
+
+      function onSubmit(event) {
+        event.preventDefault();
+        fetch(event.target.action, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+
+      function preventFormDefaults() {
+        document.querySelectorAll("form").forEach((form) => {
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+          });
+        });
+      }
+
+      var svgList = {
+        ok: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>`,
+        up: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-up"><path d="M9 18v-6H5l7-7 7 7h-4v6H9z"/></svg>`,
+        left: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-left"><path d="M18 15h-6v4l-7-7 7-7v4h6v6z"/></svg>`,
+        right: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-right"><path d="M6 9h6V5l7 7-7 7v-4H6V9z"/></svg>`,
+        down: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-down"><path d="M15 6v6h4l-7 7-7-7h4V6h6z"/></svg>`,
+        home: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`,
+        back: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-undo"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>`,
+        qr: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-qr-code"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>`,
+        fullscreen: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fullscreen"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect width="10" height="8" x="7" y="8" rx="1"/></svg>`,
+      };
+
+      function insertSvgIntoButtons() {
+        for (let button of document.querySelectorAll("button")) {
+          let svg = svgList[button.id.split("_")[1].toLowerCase()];
+          if (svg) {
+            button.innerHTML = svg;
+          }
+        }
+      }
+      insertSvgIntoButtons();
     </script>
     <style>
       html,
@@ -206,10 +187,12 @@
         margin: auto;
       }
 
-      .nav-grid-button {
-        height: 200px;
-        width: 200px;
+      .nav-grid-button,
+      input[type="submit"] {
+        height: 128px;
+        width: 128px;
         font-size: 2em;
+        font-weight: bold;
         background-color: #333;
         color: white;
         border: none;
@@ -220,6 +203,24 @@
       html {
         font-family: Arial, sans-serif;
         background-color: #292929;
+      }
+
+      #connection-alert-banner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ff0000;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        height: 20px;
+        z-index: 100;
+      }
+
+      .hidden {
+        display: none;
       }
     </style>
   </body>

@@ -14,7 +14,7 @@ static WINDOW: OnceLock<Window> = OnceLock::new();
 
 #[derive(Deserialize, Debug)]
 struct AppSession {
-    event_type: String,
+    event: String,
     action: String,
     modifier: Option<String>,
 }
@@ -41,8 +41,8 @@ fn main() {
             }
 
             async fn handle_actions(query: web::Query<AppSession>) -> impl Responder {
-                println!("{:?}", query);
-                let event = &query.event_type;
+                // println!("{:?}", query);
+                let event = &query.event;
                 let action = &query.action;
                 let modifier = &query.modifier;
                 WINDOW
