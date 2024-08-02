@@ -2,7 +2,10 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::fs;
+use std::path::Path;
 use std::sync::OnceLock;
+use std::io::BufReader;
+use rodio::{Decoder, OutputStream, source::Source};
 
 use actix_web::web;
 use actix_web::{App, HttpResponse, HttpServer, Responder};
@@ -40,6 +43,10 @@ fn main() {
                 HttpResponse::Ok().body(fs::read_to_string("remote.html").unwrap())
             }
 
+            async fn state() -> impl Responder {
+                HttpResponse::Ok().body("State Returned To Client")
+            }
+
             async fn handle_actions(query: web::Query<AppSession>) -> impl Responder {
                 // println!("{:?}", query);
                 let event = &query.event;
@@ -57,7 +64,7 @@ fn main() {
                         },
                     )
                     .unwrap();
-                HttpResponse::Ok().body("Action Sent To TV")
+                HttpResponse::Ok().body("Action Received")
             }
 
             tauri::async_runtime::spawn(
@@ -65,6 +72,7 @@ fn main() {
                     App::new()
                         .route("/", web::get().to(hello))
                         .route("/actions", web::post().to(handle_actions))
+                        .route("/state", web::get().to(state))
                 })
                 .bind((current_ip, 80))
                 .expect("Failed to bind remote address")
@@ -73,7 +81,7 @@ fn main() {
 
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![get_network_ip])
+        .invoke_handler(tauri::generate_handler![get_network_ip,play_ui_sound])
         .build(tauri::generate_context!())
         .expect("error while running tauri application");
 
@@ -84,4 +92,13 @@ fn main() {
 #[tauri::command]
 fn get_network_ip() -> String {
     local_ip().unwrap().to_string()
+}
+
+#[tauri::command]
+fn play_ui_sound(sound: String) {
+    let (_stream, stream_handle) = OutputStream::try_default().unwrap();
+    let file = BufReader::new(fs::File::open(Path::new("audio").join(&sound)).unwrap());
+    let source = Decoder::new(file).unwrap();
+    stream_handle.play_raw(source.convert_samples()).unwrap();
+    println!("Playing sound: {}", sound);
 }
