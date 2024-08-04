@@ -16,18 +16,9 @@
   import { effectsVolume, debug } from "$lib/stores/Settings";
   import HomeTile from "$lib/components/HomeTile.svelte";
   import { goto } from "$app/navigation";
+  import { type RemoteEvent, type RemoteAction } from "$lib/types/Remote";
 
   let unlisten: Function;
-
-  type RemoteEvent = {
-    payload: RemoteAction;
-  };
-
-  type RemoteAction = {
-    event: String;
-    action: String;
-    modifier: String | null;
-  };
 
   onMount(async () => {
     if (!dev) appWindow.setFullscreen(true);
@@ -59,6 +50,17 @@
       audio.play();
     }
 
+    if (action.event === "NAVIGATE") {
+      if (action.action === "FULLSCREEN") {
+        console.log("Toggled fullscreen");
+        await appWindow.setFullscreen(!fullscreen);
+        fullscreen = !fullscreen;
+      }
+      if (action.action === "HOME") {
+        goto("/");
+      }
+    }
+
     if (action.event === "SETTINGS") {
       if (action.action === "DEBUG") {
         $debug = !$debug;
@@ -85,73 +87,6 @@
         }
       }
     }
-
-    if (action.event === "NAVIGATE") {
-      if (action.action === "OK") {
-        selectTile();
-      }
-      if (action.action === "HOME") {
-        goto("/");
-      }
-      if (action.action === "FULLSCREEN") {
-        console.log("Toggled fullscreen");
-        await appWindow.setFullscreen(!fullscreen);
-        fullscreen = !fullscreen;
-      }
-      if (action.action === "QR") {
-        if ($lastQrViewTime > currentTime - 10000) {
-          $lastQrViewTime = Date.now() - 10000;
-        } else {
-          $lastQrViewTime = Date.now();
-        }
-      }
-      if (action.action === "UP") {
-        $homeTileSelection.row = $homeTileSelection.row - 1;
-      }
-      if (action.action === "DOWN") {
-        $homeTileSelection.row = $homeTileSelection.row + 1;
-      }
-      if (action.action === "LEFT") {
-        $homeTileSelection.col = $homeTileSelection.col - 1;
-      }
-      if (action.action === "RIGHT") {
-        $homeTileSelection.col = $homeTileSelection.col + 1;
-      }
-      // Constrains the selection to the bounds of both array and subarray
-      if ($homeTileSelection.row < 0) {
-        $homeTileSelection.row = 0;
-      }
-      if ($homeTileSelection.row > $homeTilesArray.length - 1) {
-        $homeTileSelection.row = $homeTilesArray.length - 1;
-      }
-      if (
-        $homeTileSelection.col >
-        $homeTilesArray[$homeTileSelection.row].length - 1
-      ) {
-        $homeTileSelection.col =
-          $homeTilesArray[$homeTileSelection.row].length - 1;
-      }
-      if ($homeTileSelection.col < 0) {
-        $homeTileSelection.col = 0;
-      }
-    }
-  }
-
-  function selectTile() {
-    let selectedTile =
-      $homeTilesArray[$homeTileSelection.row][$homeTileSelection.col];
-
-    switch (selectedTile.action) {
-      case ActionType.OPEN_APP:
-        break;
-      case ActionType.OPEN_EXE:
-        break;
-      case ActionType.OPEN_URL:
-        break;
-      case ActionType.GOTO:
-        goto("/youtube");
-        break;
-    }
   }
 
   let fullscreen = true;
@@ -167,8 +102,9 @@
 
 <div
   class="flex flex-col w-full h-full items-center justify-center absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-75"
-  class:hidden={$activeRemotes.length > 0 &&
-    !($lastQrViewTime > currentTime - 10000) || location.pathname !== "/"}>
+  class:hidden={($activeRemotes.length > 0 &&
+    !($lastQrViewTime > currentTime - 10000)) ||
+    location.pathname !== "/"}>
   {#await invoke("get_network_ip") then ip}
     <QRCodePanel text={`http://${ip}`} />
   {/await}
